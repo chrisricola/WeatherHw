@@ -1,0 +1,24 @@
+.header {
+    background-color: rgb(95, 97, 97);
+    color: azure;
+    text-align: center;
+}
+#hide {
+    display: none;
+}
+.box {
+    background: rgb(0, 103, 200);
+    color: azure;
+    text-align: center;
+    border-radius: 5px;
+    display: inline-block;
+    height: 155px;
+    margin: 3px;
+    width: 130px;
+}
+#searchAreaDiv {
+    background-color: aqua;
+}
+.col-9 {
+    background-color: brown;
+}

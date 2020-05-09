@@ -6,11 +6,11 @@ $(document).ready(function() {
   }
   for ( var i = 0; i < cityHistory.length; i++){
     console.log(cityHistory[i]);
-    // var newItem = $('<li class="historyBtn list-group-item">')
-    // newItem.addClass("searchCity");
-    // newItem.attr("data-name", cityHistory[i]);
-    // newItem.text(cityHistory[i]);
-    $("#search-history").append(cityHistory[i]);
+    var newItem = $('<li class="historyBtn list-group-item">')
+    newItem.addClass("searchCity");
+    newItem.attr("data-name", cityHistory[i]);
+    newItem.text(cityHistory[i]);
+    $("#search-history").prepend(newItem);
     }
   
    
@@ -28,10 +28,11 @@ $(document).ready(function() {
     })
   .then(function(response) {
     console.log(response);
-    var date = moment().format('LL');
+    var date = moment().format('L');
     var lat = response.coord.lat;
     var lon = response.coord.lon;
     $(".city").html("<h1>" + response.name + " (" + date + ")" + "</h1>");
+    // $("icon").html("<img src=https://openweathermap.org/img/w/${forecast.list[i].weather[0].icon}.png"/>)
     $(".temp").text("Temp: " + response.main.temp);
     $(".wind").text("Wind Speed: " + response.wind.speed);
     $(".humidity").text("Humidity: " + response.main.humidity);
@@ -45,9 +46,21 @@ $(document).ready(function() {
       })
     .then(function(response){
       console.log(response);
-      $(".uv").text("UV: " + response.value); 
-    })
-    });
+      var uvindex = response.value;
+      if (uvindex < 6 && uvindex >= 3){
+        $(".uv").css("background-color", "yellow");
+    }
+    else if (uvindex < 8 && uvindex >= 6){
+        $(".uv").css("background-color", "orange");
+    }
+    else if (uvindex < 11 && uvindex >= 8){
+        $(".uv").css("background-color", "red");
+    }
+    else if (uvindex >= 11){
+        $(".uv").css("background-color", "violet");
+    }
+    $(".uv").text("UV Index: " + uvindex);
+    }) 
     var queryURLFor = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=95c06a4959ecde027a9ba59c29561f0d";
     $.ajax({
       url: queryURLFor,
@@ -55,11 +68,20 @@ $(document).ready(function() {
       })
     .then(function(response){
       console.log(response);
+      $(".box1").html("<p>" +  date + "</p>");
+      console.log(response.list[0]);
+      console.log(response.list[7]);
+      console.log(response.list[14]);
+      console.log(response.list[21]);
+      console.log(response.list[28]);
+      console.log(response.list[34]);
+    })
+    });
+
     })
   });
 
 
-});
 
 /*key is a variable
 

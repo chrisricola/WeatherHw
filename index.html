@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Weather App</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
@@ -19,7 +20,7 @@
       <div class="row">
         <div id="searchAreaDiv"
             class="col-lg-3">
-          <div class="col-4"><form class="form-inline">
+          <div class="col-5"><form class="form-inline">
           <i class="fas fa-search" aria-hidden="true"></i>
           <input class="form-control form-control"  id="cityTxt" type="text" placeholder="Search City"/>
           <button id="cityBtn">Search</button>
@@ -27,7 +28,7 @@
         </div>
         <br>
             <div class="row">
-              <div class="col-lg-3">
+              <div class="col-2">
             <h4 id="searchedMovieH3" class="mx-left">Search History</h4>
               </div>
               <div>
@@ -35,7 +36,7 @@
             </div>
           </div>
         </div>
-        <div class="col-9">
+        <div class="col-7">
           <div class="city"></div>
           <div class="wind"></div>
           <div class="humidity"></div>
@@ -43,11 +44,12 @@
         </div>
         <div>
           <body>
-            <div class="container">
+            <div class="container" id="hide">
               <div class="box1 box"></div>
               <div class="box2 box"></div>
               <div class="box3 box"></div>
               <div class="box4 box"></div>
+              <div class="box5 box"></div>
             </div>
         </div>
       </div>
