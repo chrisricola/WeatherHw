@@ -16,4 +16,14 @@
     margin: 3px;
     width: 130px;
 }
+.temp{
+    font-weight: bolder;
+    font-size: larger;
+}
+#weatherCont {
+    border-radius: 2px;
+    border-color: black;
+    padding: 30px;
+}
+
 
