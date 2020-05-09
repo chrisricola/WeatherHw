@@ -13,7 +13,7 @@ $(document).ready(function() {
     $("#search-history").prepend(newItem);
     }
   
-   
+   // function getWeather(city) { //paste you logic here  } 
 
   //loop through your city arrays, create a btn el, give btn a value[i] & append to a page in an element that you want it to be
   $( "#cityBtn").on('click', function(e) {
@@ -95,6 +95,10 @@ $(document).ready(function() {
         //s.3
         day.append(dayTemp);
 
+        var dayHumidity = $("<p>");
+        dayHumidity.text("Humidity:" + infoList[i].main.humidity);
+        day.append(dayHumidity);
+
         //this linke appends the entire box to the page
         $("#day5weather").append(day);
       }
@@ -113,7 +117,11 @@ $(document).ready(function() {
     })
   });
 
-
+//create an on click $(this)
+//$('whatever li class is').click(
+//$(this).data-name //you're trying to get "Dallas"
+//launch the function(city name) to get the weather for that city
+//)
 
 /*key is a variable
 
