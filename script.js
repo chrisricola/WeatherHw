@@ -27,17 +27,17 @@ $(document).ready(function() {
     method: "GET",
     })
   .then(function(response) {
-    console.log(response);
+    //console.log(response);
     var date = moment().format('L');
     var lat = response.coord.lat;
     var lon = response.coord.lon;
     $(".city").html("<h1>" + response.name + " (" + date + ")" + "</h1>");
-    // $("icon").html("<img src=https://openweathermap.org/img/w/${forecast.list[i].weather[0].icon}.png"/>)
+    $("icon").html("<img src=" + response.weather.icon + "/>")
     $(".temp").text("Temp: " + response.main.temp);
     $(".wind").text("Wind Speed: " + response.wind.speed);
     $(".humidity").text("Humidity: " + response.main.humidity);
   
-    cityHistory.push(city);
+    //cityHistory.push(city);
     localStorage.setItem('key',JSON.stringify(cityHistory))
     var queryURLUV = "http:api.openweathermap.org/data/2.5/uvi?appid=95c06a4959ecde027a9ba59c29561f0d&lat=" + lat + "&lon=" +lon;
     $.ajax({
@@ -45,10 +45,10 @@ $(document).ready(function() {
       method: "GET",
       })
     .then(function(response){
-      console.log(response);
+      //console.log(response);
       var uvindex = response.value;
       if (uvindex < 6 && uvindex >= 3){
-        $(".uv").css("background-color", "yellow");
+        $(uvindex).css("background-color", "yellow");
     }
     else if (uvindex < 8 && uvindex >= 6){
         $(".uv").css("background-color", "orange");
@@ -61,20 +61,52 @@ $(document).ready(function() {
     }
     $(".uv").text("UV Index: " + uvindex);
     }) 
-    var queryURLFor = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=95c06a4959ecde027a9ba59c29561f0d";
+    var queryURLFor = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=95c06a4959ecde027a9ba59c29561f0d&units=imperial";
     $.ajax({
       url: queryURLFor,
       method: "GET",
       })
     .then(function(response){
-      console.log(response);
-      $(".box1").html("<p>" +  date + "</p>");
-      console.log(response.list[0]);
-      console.log(response.list[7]);
-      console.log(response.list[14]);
-      console.log(response.list[21]);
-      console.log(response.list[28]);
-      console.log(response.list[34]);
+      // console.log(response);
+      $("#day5weather").html(" ");
+      for ( var i = 3; i < 40; i=i+8) {
+        var infoList = response.list
+        console.log(infoList[i]);
+        var day = $("<div>")
+        day.attr("class", "box")
+        //step 1. create an element
+        var dayDate = $("<p>");
+        //step 2. give the element an attribute/text
+        dayDate.text(moment(infoList[i].dt_txt).format("MM/DD/YYYY")); 
+        //step 3. append it to the box
+        day.append(dayDate);
+        
+        //s.1
+        var dayIcon = $('<img>')
+        //s.2
+        dayIcon.attr('src', "https://openweathermap.org/img/w/" + infoList[i].weather[0].icon + ".png")
+        //s.3        
+        day.append(dayIcon)
+
+        //s.1
+        var dayTemp = $("<p>");
+        //s.2
+        dayTemp.text(`Temp: ${infoList[i].main.temp}`);
+        //s.3
+        day.append(dayTemp);
+
+        //this linke appends the entire box to the page
+        $("#day5weather").append(day);
+      }
+      // $(".box1").html("<p>" +  date + "</p>");
+      // $(".box1").text("Temp: " + response.list[i].main.temp);
+      // $(".box1").text("Humidity: " + response.list[1].main.humidity);
+      // console.log(response.list[0]);
+      // console.log(response.list[7]);
+      // console.log(response.list[14]);
+      // console.log(response.list[21]);
+      // console.log(response.list[28]);
+      // console.log(response.list[34]);
     })
     });
 
