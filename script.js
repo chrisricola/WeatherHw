@@ -19,25 +19,26 @@ $(document).ready(function() {
   $( "#cityBtn").on('click', function(e) {
   e.preventDefault();
   var city = $("#cityTxt").val() 
-  //console.log(city);
+  console.log(city);
   var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=95c06a4959ecde027a9ba59c29561f0d&units=imperial";
-  // console.log(queryURL);
+  console.log(queryURL);
   $.ajax({
     url: queryURL,
     method: "GET",
     })
   .then(function(response) {
-    //console.log(response);
+    console.log(response);
     var date = moment().format('L');
     var lat = response.coord.lat;
     var lon = response.coord.lon;
-    $(".city").html("<h1>" + response.name + " (" + date + ")" + "</h1>");
-    $("icon").html("<img src=" + response.weather.icon + "/>")
+    $(".city").html("<h1>" + response.name + " (" + date + ")" + "</h1>"); 
+    $("img").attr('src', "https://openweathermap.org/img/w/" + response.weather[0].icon + ".png");
+    console.log(response.weather[0].icon)
     $(".temp").text("Temp: " + response.main.temp);
     $(".wind").text("Wind Speed: " + response.wind.speed);
     $(".humidity").text("Humidity: " + response.main.humidity);
   
-    //cityHistory.push(city);
+    cityHistory.push(city);
     localStorage.setItem('key',JSON.stringify(cityHistory))
     var queryURLUV = "http:api.openweathermap.org/data/2.5/uvi?appid=95c06a4959ecde027a9ba59c29561f0d&lat=" + lat + "&lon=" +lon;
     $.ajax({
@@ -45,7 +46,7 @@ $(document).ready(function() {
       method: "GET",
       })
     .then(function(response){
-      //console.log(response);
+      console.log(response);
       var uvindex = response.value;
       if (uvindex < 6 && uvindex >= 3){
         $(uvindex).css("background-color", "yellow");
