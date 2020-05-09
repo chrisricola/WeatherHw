@@ -3,9 +3,9 @@
     color: azure;
     text-align: center;
 }
-#hide {
-    display: none;
-}
+/* #hide {
+    display: none; */
+/* } */
 .box {
     background: rgb(0, 103, 200);
     color: azure;
@@ -16,9 +16,4 @@
     margin: 3px;
     width: 130px;
 }
-#searchAreaDiv {
-    background-color: aqua;
-}
-.col-9 {
-    background-color: brown;
-}
+
